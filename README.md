@@ -4,11 +4,24 @@ Taxes are tough. The math behind them, however, isn't. It shouldn't be this diff
 
 For a non-web, Ruby version see [this prior project](https://github.com/at1as/AMT_Calculator).
 
+Issues, PRs, and feedback are welcome (and encouraged 😅)
+
+### Website
+
+Hosted site snapshot from 2 August 2018 available here [https://www.jasonwillems.com](https://www.jasonwillems.com/sites/amtcalculator/index.html).
+
+Note that it's a static HTML page. Information entered does not leave that page.
+
 ### Screenshot
 
 #### Taken on 2 August 2018:
 
 ![screenshot](https://github.com/at1as/at1as.github.io/raw/master/github_repo_assets/amt_calculator_1.png)
+
+### TODO
+
+* add support for other filing types
+* add explanations for each field
 
 ### Legal
 
