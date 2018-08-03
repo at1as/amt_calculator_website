@@ -6,6 +6,8 @@ For a non-web, Ruby version see [this prior project](https://github.com/at1as/AM
 
 ### Screenshot
 
+#### Taken on 2 August 2018:
+
 ![screenshot](https://github.com/at1as/at1as.github.io/raw/master/github_repo_assets/amt_calculator_1.png)
 
 ### Legal
