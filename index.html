@@ -3,23 +3,23 @@
   <head>
     <meta charset="utf8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><!-- for tooltips -->
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><!-- for tooltips -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </head>
   <body class="bg-light">
-		<div class="container">
-			
-			<div class="py-5 text-center">
+    <div class="container">
+      
+      <div class="py-5 text-center">
         <h2 id="page_title">AMT Tax Calculator</h2>
         <!--<p class="lead">Taxes are tough. The math behind them, however, isn't. AMT Tax bills should not come as a end of year shock, and it shouldn't cost hundreds of dollars to have tax accountants explain the financial consequences of exercising stock</p>-->
-				<p class="lead">Proactively plan around AMT <i>before</i> you exercise</p>
+        <p class="lead">Proactively plan around AMT <i>before</i> you exercise</p>
       </div>
 
-			<div class="row">
-				
-				<!-- TAX OUTPUT SECTION -->
-				<div class="col-md-4 order-md-2 mb-4">
+      <div class="row">
+        
+        <!-- TAX OUTPUT SECTION -->
+        <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Tax Bill</span>
           </h4>
@@ -38,11 +38,11 @@
               </div>
               <span class="text-muted" id="amt_bill">$0</span>
             </li>
-						<li class="list-group-item d-flex justify-content-between">
+            <li class="list-group-item d-flex justify-content-between">
               <span>Delta</span>
               <strong id="tax_amt_delta" >$0</strong>
             </li>
-						<li class="list-group-item d-flex justify-content-between bg-light">
+            <li class="list-group-item d-flex justify-content-between bg-light">
               <div>
                 <h6 class="my-0">Tax Method</h6>
                 <small id="type_of_tax_owed">You must pay conventional federal tax</small>
@@ -50,144 +50,144 @@
             </li>
           </ul>
         </div>
-				<!-- END TAX OUTPUT SECTION -->
+        <!-- END TAX OUTPUT SECTION -->
 
-				<!-- TAX INPUT SECTION -->
-				<div class="col-md-8 order-md-1">
-					<h4 class="mb-3">Tax Information</h4>
+        <!-- TAX INPUT SECTION -->
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Tax Information</h4>
 
-					<form>
-						<div class="row">
-							<div class="mb-3 col-md-6">
-								<label for="inputYear">Year</label>
-								<input type="number" class="form-control" id="inputYear" value="2018" readonly>
-							</div>
-							<div class="mb-3 col-md-6">
-								<label for="inputFilingStatus">Filing Status</label>
-								<select id="inputFilingStatus" class="form-control" readonly>
-									<option selected>Single</option>
-								</select>
-							</div>
-						</div>
-						
-						<hr class="mb4">
-						<h4 class="mb-3">Earnings</h4>
+          <form>
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <label for="inputYear">Year</label>
+                <input type="number" class="form-control" id="inputYear" value="2018" readonly>
+              </div>
+              <div class="mb-3 col-md-6">
+                <label for="inputFilingStatus">Filing Status</label>
+                <select id="inputFilingStatus" class="form-control" readonly>
+                  <option selected>Single</option>
+                </select>
+              </div>
+            </div>
+            
+            <hr class="mb4">
+            <h4 class="mb-3">Earnings</h4>
 
-						<div class="row">
-							<div class="mb-3 col-md-6">
-								<label for="inputIncome">Salary</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text">$</span>
-									</div>
-									<input type="number" min="0" class="form-control" id="inputIncome" value=0 style="letter-spacing:0.1em">
-								</div>
-							</div>
-							<div class="md-3 col-md-6">
-								<label for="rsuIncome">RSU Income</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text">$</span>
-									</div>
-									<input type="number" min="0" class="form-control" id="rsuIncome" value=0 style="letter-spacing:0.1em">
-								</div>
-							</div>
-						</div>
-						<div class="mb-3">
-							<label for="isoGains">Incentive Stock Option Gains (ISO)</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text">$</span>
-									</div>
-									<input type="number" min="0" class="form-control" id="isoGains" value="0" style="letter-spacing:0.1em">
-								</div>
-						</div>
-						<div class="mb-3">
-							<label for="pensionContributions">Personal Pension Contributions</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text">$</span>
-									</div>
-									<input type="number" min="0" max="28000" class="form-control" id="pensionContributions" value=0 style="letter-spacing:0.1em">
-								</div>
-						</div>
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <label for="inputIncome">Salary</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="number" min="0" class="form-control" id="inputIncome" value=0 style="letter-spacing:0.1em">
+                </div>
+              </div>
+              <div class="md-3 col-md-6">
+                <label for="rsuIncome">RSU Income</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="number" min="0" class="form-control" id="rsuIncome" value=0 style="letter-spacing:0.1em">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="isoGains">Incentive Stock Option Gains (ISO)</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="number" min="0" class="form-control" id="isoGains" value="0" style="letter-spacing:0.1em">
+                </div>
+            </div>
+            <div class="mb-3">
+              <label for="pensionContributions">Personal Pension Contributions</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="number" min="0" max="28000" class="form-control" id="pensionContributions" value=0 style="letter-spacing:0.1em">
+                </div>
+            </div>
 
-						<hr class="mb4">
+            <hr class="mb4">
 
-						<div class="form-group row">
-							<div class="col-sm-12">
-								<button type="submit" class="btn btn-primary btn-lg btn-block">
-									Calculate
-								</button>
-							</div>
-						</div>
-				</div>
-				<!-- END TAX INPUT SECTION -->
-			</div>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                  Calculate
+                </button>
+              </div>
+            </div>
+        </div>
+        <!-- END TAX INPUT SECTION -->
+      </div>
 
-			<!-- BEGIN FOOTER -->
-			<footer class="my-5 pt-5 text-muted text-center text-small">
+      <!-- BEGIN FOOTER -->
+      <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2018 Jason Willems</p>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="#">Github</a></li>
         </ul>
       </footer>
-			<!-- END FOOTER -->
-		</div>
+      <!-- END FOOTER -->
+    </div>
   <body>
 
   <script type="text/javascript">
-		// <START> UPDATE THIS SECTION YEARLY (Current: 2018)
-		function taxYear() {
-			return 2018;
-		}
+    // <START> UPDATE THIS SECTION YEARLY (Current: 2018)
+    function taxYear() {
+      return 2018;
+    }
 
-		function amtTaxDetails() {
-			return {
-					amt_low_rate: 					0.26
-				, amt_high_rate: 					0.28
-				, amt_exemption_amount: 	70300
-				, amt_bracket_crossover: 	191500
-				, amt_phase_out_income:		500000
-				, amt_phase_out_percent:	0.25
-				, tax_year: 							taxYear()
-			}
-		}
+    function amtTaxDetails() {
+      return {
+          amt_low_rate:           0.26
+        , amt_high_rate:           0.28
+        , amt_exemption_amount:   70300
+        , amt_bracket_crossover:   191500
+        , amt_phase_out_income:    500000
+        , amt_phase_out_percent:  0.25
+        , tax_year:               taxYear()
+      }
+    }
 
-		function standardTaxDetails() {
+    function standardTaxDetails() {
       const inf = Number.POSITIVE_INFINITY;
-			return {
-					standard_deduction:	12000
-				, tax_brackets:	[
-						// [bracket floor, bracket ceiling, percent]
-						[0,       9525,   0.10]
-					, [9526,    38700,  0.12]
-					, [38701,   82500,  0.22]
-					, [82501,   157500, 0.24]
-					, [157501,  200000, 0.32]
-					, [200001,  500000, 0.35]
-					, [500001,  inf,    0.37]
-				]
-				,	tax_year: taxYear()
-			}
-		}
-		// <END> UPDATE THIS SECTION YEARLY (Current: 2018)
+      return {
+          standard_deduction:  12000
+        , tax_brackets:  [
+            // [bracket floor, bracket ceiling, percent]
+            [0,       9525,   0.10]
+          , [9526,    38700,  0.12]
+          , [38701,   82500,  0.22]
+          , [82501,   157500, 0.24]
+          , [157501,  200000, 0.32]
+          , [200001,  500000, 0.35]
+          , [500001,  inf,    0.37]
+        ]
+        ,  tax_year: taxYear()
+      }
+    }
+    // <END> UPDATE THIS SECTION YEARLY (Current: 2018)
 
-		function asCurrency(amount) {
-			// Ex. 555555 -> 555,555.00
-			// 		Note that toFixed rounds digits
-			//		let x = 9.999; x.toFixed(2)  	=> "10.00"
-			//		Intl.NumberFormat() is a better way to do this, but browser support is so-so
-			return "$" + (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-		}
+    function asCurrency(amount) {
+      // Ex. 555555 -> 555,555.00
+      //     Note that toFixed rounds digits
+      //    let x = 9.999; x.toFixed(2)    => "10.00"
+      //    Intl.NumberFormat() is a better way to do this, but browser support is so-so
+      return "$" + (amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    }
 
     function reducedAMTExemptionAmount(exemption) {
       return exemption > 0 ? exemption : 0;
     }
 
     function calculateAMT(income, iso_gains, rsu_income, pension) {
-      const lower_rate  			= amtTaxDetails().amt_low_rate;
-      const higher_rate 			= amtTaxDetails().amt_high_rate;
+      const lower_rate        = amtTaxDetails().amt_low_rate;
+      const higher_rate       = amtTaxDetails().amt_high_rate;
 
       const exemption_amount  = amtTaxDetails().amt_exemption_amount;
       const bracket_crossover = amtTaxDetails().amt_bracket_crossover;
@@ -211,7 +211,7 @@
 
     function calculateIncomeTax(income, iso_gains, rsu_income, pension) {
       const standard_deduction = standardTaxDetails().standard_deduction;
-      const adjusted_income 	 = income + (iso_gains*0) + rsu_income - pension - standard_deduction;
+      const adjusted_income    = income + (iso_gains*0) + rsu_income - pension - standard_deduction;
        
       return standardTaxDetails().tax_brackets.reduce((acc, bracket) => {
         const reached_current_tax_bracket = bracket[0] < adjusted_income;
@@ -225,43 +225,44 @@
         else
           return acc;
       
-			}, 0); 
+      }, 0); 
     }
 
-		function calculateTaxes() {
-			const income 		 			= Number(document.getElementById('inputIncome').value) || 0;
-			const rsu_income 			= Number(document.getElementById('rsuIncome').value) || 0;
-			const iso_gains  			= Number(document.getElementById('isoGains').value) || 0;
-			const pension_contrib = Number(document.getElementById('pensionContributions').value) || 0;
+    function calculateTaxes() {
+      const income            = Number(document.getElementById('inputIncome').value) || 0;
+      const rsu_income       = Number(document.getElementById('rsuIncome').value) || 0;
+      const iso_gains        = Number(document.getElementById('isoGains').value) || 0;
+      const pension_contrib = Number(document.getElementById('pensionContributions').value) || 0;
 
-			const federal_tax	= calculateIncomeTax(income, iso_gains, rsu_income, pension_contrib);
-			const amt_tax		 	= calculateAMT(income, iso_gains, rsu_income, pension_contrib);
-			
-			const is_amt_due = federal_tax < amt_tax ? true : false;
-			const delta			 = Math.abs(federal_tax - amt_tax);
-			
-			document.getElementById('tax_bill').innerHTML 			= `${asCurrency(federal_tax)}`;
-			document.getElementById('amt_bill').innerHTML 			= `${asCurrency(amt_tax)}`;
-			document.getElementById('tax_amt_delta').innerHTML 	= `${asCurrency(delta)}`;
-		
-			if (is_amt_due) {
-				document.getElementById('type_of_tax_owed').innerHTML		= 'You will be required to pay AMT';
-				document.getElementById('type_of_tax_owed').style.color	= 'red';
-			} else {
-				document.getElementById('type_of_tax_owed').innerHTML 	= 'You must pay conventional federal tax';
-				document.getElementById('type_of_tax_owed').style.color	= 'green';
-			}
-		}
+      const federal_tax  = calculateIncomeTax(income, iso_gains, rsu_income, pension_contrib);
+      const amt_tax       = calculateAMT(income, iso_gains, rsu_income, pension_contrib);
+      
+      const is_amt_due = federal_tax < amt_tax ? true : false;
+      const delta       = Math.abs(federal_tax - amt_tax);
+      
+      document.getElementById('tax_bill').innerHTML       = `${asCurrency(federal_tax)}`;
+      document.getElementById('amt_bill').innerHTML       = `${asCurrency(amt_tax)}`;
+      document.getElementById('tax_amt_delta').innerHTML   = `${asCurrency(delta)}`;
+    
+      if (is_amt_due) {
+        document.getElementById('type_of_tax_owed').innerHTML    = 'You will be required to pay AMT';
+        document.getElementById('type_of_tax_owed').style.color  = 'red';
+      } else {
+        document.getElementById('type_of_tax_owed').innerHTML   = 'You must pay conventional federal tax';
+        document.getElementById('type_of_tax_owed').style.color  = 'green';
+      }
+    }
 
-		const tax_form = document.querySelector('form');
-		tax_form.addEventListener('submit', evt => { 
-			evt.preventDefault();
-			calculateTaxes();
-		});
+    const tax_form = document.querySelector('form');
+    tax_form.addEventListener('submit', evt => { 
+      evt.preventDefault();
+      calculateTaxes();
+    });
 
-		document.addEventListener('DOMContentLoaded', function(){
-			document.getElementById('page_title').innerHTML = `${taxYear()} AMT Tax Calculator`;
-		});
+    document.addEventListener('DOMContentLoaded', function(){
+      document.getElementById('page_title').innerHTML = `${taxYear()} AMT Tax Calculator`;
+    });
 
   </script>
 </html>
+
