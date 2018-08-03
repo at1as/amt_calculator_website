@@ -129,7 +129,7 @@
       <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2018 Jason Willems</p>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Github</a></li>
+          <li class="list-inline-item"><a href="https://github.com/at1as/amt_calculator_website">Github</a></li>
         </ul>
       </footer>
       <!-- END FOOTER -->
@@ -229,27 +229,27 @@
     }
 
     function calculateTaxes() {
-      const income            = Number(document.getElementById('inputIncome').value) || 0;
-      const rsu_income       = Number(document.getElementById('rsuIncome').value) || 0;
-      const iso_gains        = Number(document.getElementById('isoGains').value) || 0;
+      const income          = Number(document.getElementById('inputIncome').value) || 0;
+      const rsu_income      = Number(document.getElementById('rsuIncome').value) || 0;
+      const iso_gains       = Number(document.getElementById('isoGains').value) || 0;
       const pension_contrib = Number(document.getElementById('pensionContributions').value) || 0;
 
-      const federal_tax  = calculateIncomeTax(income, iso_gains, rsu_income, pension_contrib);
-      const amt_tax       = calculateAMT(income, iso_gains, rsu_income, pension_contrib);
+      const federal_tax = calculateIncomeTax(income, iso_gains, rsu_income, pension_contrib);
+      const amt_tax     = calculateAMT(income, iso_gains, rsu_income, pension_contrib);
       
       const is_amt_due = federal_tax < amt_tax ? true : false;
-      const delta       = Math.abs(federal_tax - amt_tax);
+      const delta      = Math.abs(federal_tax - amt_tax);
       
       document.getElementById('tax_bill').innerHTML       = `${asCurrency(federal_tax)}`;
       document.getElementById('amt_bill').innerHTML       = `${asCurrency(amt_tax)}`;
-      document.getElementById('tax_amt_delta').innerHTML   = `${asCurrency(delta)}`;
+      document.getElementById('tax_amt_delta').innerHTML  = `${asCurrency(delta)}`;
     
       if (is_amt_due) {
-        document.getElementById('type_of_tax_owed').innerHTML    = 'You will be required to pay AMT';
-        document.getElementById('type_of_tax_owed').style.color  = 'red';
+        document.getElementById('type_of_tax_owed').innerHTML   = 'You will be required to pay AMT';
+        document.getElementById('type_of_tax_owed').style.color = 'red';
       } else {
         document.getElementById('type_of_tax_owed').innerHTML   = 'You must pay conventional federal tax';
-        document.getElementById('type_of_tax_owed').style.color  = 'green';
+        document.getElementById('type_of_tax_owed').style.color = 'green';
       }
     }
 
