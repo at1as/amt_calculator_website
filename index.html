@@ -68,11 +68,11 @@
               </div>
               <div class="mb-3 col-md-6">
                 <label for="inputFilingStatus">Filing Status</label>
-                <select id="inputFilingStatus" class="form-control" readonly>
+                <select id="inputFilingStatus" class="form-control">
                   <option value="single" selected>Single</option>
-                  <!--<option value="married">Married</option>-->
-                  <!--<option value="married_separate">Married Filing Separately</option>-->
-                  <!--<option value="head_of_household">Head of Household</option>-->
+                  <option value="married">Married</option>
+                  <option value="married_separate">Married Filing Separately</option>
+                  <option value="head_of_household">Head of Household</option>
                 </select>
               </div>
             </div>
@@ -149,33 +149,84 @@
       return 2018;
     }
 
-    function amtTaxDetails() {
+    function amtTaxDetails(filing_status) {
+      function exemptionAmount() {
+        switch(filing_status) {
+          case "married_joint":     return 109400;
+          case "married_separate":  return 54700;
+          default:                  return 70300;
+        }
+      }
+      
       return {
           amt_low_rate:           0.26
         , amt_high_rate:          0.28
-        , amt_exemption_amount:   70300
-        , amt_bracket_crossover:  191500
-        , amt_phase_out_income:   500000
+        , amt_exemption_amount:   (() => { return exemptionAmount() })()
+        , amt_bracket_crossover:  (() => { return (filing_status === "married_joint" ? 95550   : 191500) })()
+        , amt_phase_out_income:   (() => { return (filing_status === "married_joint" ? 1000000 : 500000) })()
         , amt_phase_out_percent:  0.25
         , tax_year:               taxYear()
       }
     }
 
-    function standardTaxDetails() {
+    function standardTaxDetails(filing_status) {
       const inf = Number.POSITIVE_INFINITY;
+      function standardDeduction() {
+        switch(filing_status) {
+          case "single":            return 12000;
+          case "married":           return 24000;
+          case "married_separate":  return 12000;
+          case "head_of_household": return 18000;
+        }
+      }
+      
       return {
-          standard_deduction:  12000
-        , tax_brackets:  [
-            // [bracket floor, bracket ceiling, percent]
-            [0,       9525,   0.10]
-          , [9526,    38700,  0.12]
-          , [38701,   82500,  0.22]
-          , [82501,   157500, 0.24]
-          , [157501,  200000, 0.32]
-          , [200001,  500000, 0.35]
-          , [500001,  inf,    0.37]
-        ]
-        ,  tax_year: taxYear()
+          tax_year: taxYear()
+        , standard_deduction: standardDeduction()
+        , tax_brackets: function() {
+            switch(filing_status) {
+              case "single":
+                return [
+                    [0,       9525,   0.10]
+                  , [9525,    38700,  0.12]
+                  , [38701,   82500,  0.22]
+                  , [82501,   157500, 0.24]
+                  , [157501,  200000, 0.32]
+                  , [200001,  500000, 0.35]
+                  , [500001,  inf,    0.37]
+                ];
+              case "married":
+                return [
+                    [0,       19050,  0.10]
+                  , [19050,   77400,  0.12]
+                  , [77400,   165000, 0.22]
+                  , [165000,  315000, 0.24]
+                  , [315000,  400000, 0.32]
+                  , [400000,  600000, 0.35]
+                  , [600000,  inf,    0.37]
+                ];
+              case "married_separate":
+                return [
+                    [0,       9525,   0.10]
+                  , [9526,    38700,  0.12]
+                  , [38701,   82500,  0.22]
+                  , [82501,   157500, 0.24]
+                  , [157501,  200000, 0.32]
+                  , [200001,  500000, 0.35]
+                  , [300000,  inf,    0.37]
+                ];
+              case "head_of_household":
+                return [
+                    [0,       13600,  0.10]
+                  , [13601,   51800,  0.12]
+                  , [51801,   82500,  0.22]
+                  , [82501,   157500, 0.24]
+                  , [157501,  200000, 0.32]
+                  , [200001,  500000, 0.35]
+                  , [500001,  inf,    0.37]
+                ];
+          }
+        }()
       }
     }
     // <END> UPDATE THIS SECTION YEARLY (Current: 2018)
@@ -192,14 +243,16 @@
       return exemption > 0 ? exemption : 0;
     }
 
-    function calculateAMT(income, iso_gains, rsu_income, pension) {
-      const lower_rate        = amtTaxDetails().amt_low_rate;
-      const higher_rate       = amtTaxDetails().amt_high_rate;
+    function calculateAMT(income, iso_gains, rsu_income, pension, filing_status) {
+      const amt_details       = amtTaxDetails(filing_status)
+      
+      const lower_rate        = amt_details.amt_low_rate;
+      const higher_rate       = amt_details.amt_high_rate;
 
-      const exemption_amount  = amtTaxDetails().amt_exemption_amount;
-      const bracket_crossover = amtTaxDetails().amt_bracket_crossover;
-      const phase_out_income  = amtTaxDetails().amt_phase_out_income;
-      const phase_out_percent = amtTaxDetails().amt_phase_out_percent;
+      const exemption_amount  = amt_details.amt_exemption_amount;
+      const bracket_crossover = amt_details.amt_bracket_crossover;
+      const phase_out_income  = amt_details.amt_phase_out_income;
+      const phase_out_percent = amt_details.amt_phase_out_percent;
 
       const adjusted_income   = income + rsu_income + iso_gains - pension;
       const reduced_exemption = exemption_amount - ((adjusted_income - phase_out_income) * phase_out_percent)
@@ -216,11 +269,11 @@
       }
     }
 
-    function calculateIncomeTax(income, iso_gains, rsu_income, pension) {
-      const standard_deduction = standardTaxDetails().standard_deduction;
+    function calculateIncomeTax(income, iso_gains, rsu_income, pension, filing_status) {
+      const standard_deduction = standardTaxDetails(filing_status).standard_deduction;
       const adjusted_income    = income + (iso_gains*0) + rsu_income - pension - standard_deduction;
        
-      return standardTaxDetails().tax_brackets.reduce((acc, bracket) => {
+      return standardTaxDetails(filing_status).tax_brackets.reduce((acc, bracket) => {
         const reached_current_tax_bracket = bracket[0] < adjusted_income;
         const bracket_taxable_rate        = bracket[0] > adjusted_income ? 0 : bracket[2];
         const floor_of_tax_bracket        = bracket[0];
@@ -242,15 +295,15 @@
       const iso_gains       = Number(document.getElementById('isoGains').value) || 0;
       const pension_contrib = Number(document.getElementById('pensionContributions').value) || 0;
 
-      const federal_tax = calculateIncomeTax(income, iso_gains, rsu_income, pension_contrib);
-      const amt_tax     = calculateAMT(income, iso_gains, rsu_income, pension_contrib);
+      const federal_tax = calculateIncomeTax(income, iso_gains, rsu_income, pension_contrib, filing_status);
+      const amt_tax     = calculateAMT(income, iso_gains, rsu_income, pension_contrib, filing_status);
       
       const is_amt_due = federal_tax < amt_tax ? true : false;
       const delta      = Math.abs(federal_tax - amt_tax);
       
-      document.getElementById('tax_bill').innerHTML       = `${asCurrency(federal_tax)}`;
-      document.getElementById('amt_bill').innerHTML       = `${asCurrency(amt_tax)}`;
-      document.getElementById('tax_amt_delta').innerHTML  = `${asCurrency(delta)}`;
+      document.getElementById('tax_bill').innerHTML      = `${asCurrency(federal_tax)}`;
+      document.getElementById('amt_bill').innerHTML      = `${asCurrency(amt_tax)}`;
+      document.getElementById('tax_amt_delta').innerHTML = `${asCurrency(delta)}`;
     
       if (is_amt_due) {
         document.getElementById('type_of_tax_owed').innerHTML   = 'You will be required to pay AMT';
