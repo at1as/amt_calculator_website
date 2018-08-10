@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><!-- for tooltips -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -19,7 +20,7 @@
           This provides neither legal nor reliable tax advice. Talk to a tax lawyer to discuss your specific situation
         </span>
       </div>
-
+ 
       <div class="row">
         
         <!-- TAX OUTPUT SECTION -->
@@ -82,7 +83,9 @@
 
             <div class="row">
               <div class="mb-3 col-md-6">
-                <label for="inputIncome">Salary (<span style="font-weight:500"> + Taxable Benefits</span>)</label>
+                <label for="inputIncome" style="width:100%">Salary (<span style="font-weight:500"> + Taxable Benefits</span>)
+                  <i class="fas fa-info-circle" style="float:right" data-toggle="tooltip" data-html="true" data-placement="top" title="Total salary compensation + taxable benefits (cafeteria food, etc). Check a recent W2 for an idea of your taxable benefits.<br/><br/>Exclude stock based compensation from this calculation (it will be added in the <b>RSU</b> and <b>ISO</b> fields)."></i>
+                </label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
@@ -91,7 +94,9 @@
                 </div>
               </div>
               <div class="md-3 col-md-6">
-                <label for="rsuIncome">Restricted Stock Unit Income (<span style="font-weight:500">RSUs</span>)</label>
+                <label for="rsuIncome" style="width:100%">Restricted Stock Unit Income (<span style="font-weight:500">RSUs</span>)
+                  <i class="fas fa-info-circle" style="float:right" data-toggle="tooltip" data-html="true" data-placement="top" title="Total pre-tax value of RSUs that vested during 2018.<br/><br/>For instance, if you were given a total of 100 shares in 2018 and their market price at time of vest was <b>$50.00</b>, this value would be (<em>100 shares * $50.00</em>) = <u>$5000</u>.<br/><br/> If you vest quarterly, take into account the market price each quarter."></i>
+                </label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
@@ -101,21 +106,25 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="isoGains">Incentive Stock Option Gains (<span style="font-weight:500">ISOs</span>)</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
-                  <input type="number" min="0" step="0.01" class="form-control" id="isoGains" value="0" style="letter-spacing:0.1em">
+              <label for="isoGains" style="width:100%">Incentive Stock Option Gains (<span style="font-weight:500">ISOs</span>)
+                <i class="fas fa-info-circle" style="float:right" data-toggle="tooltip" data-html="true" data-placement="top" title="Total gains from exercised ISOs in 2018.<br/><br/>For example, if 20 shares vested in 2018, but you only exercised 10 of them at a strike price of $10 with a market value of $40 at time of exercise, your gains would be <em>10 exercised shares * ($40 market price - $10 option price)</em> = <u>$300</u>.<br/><br/>If you exercised multiple times during the year, take into account the varying market price at time of exercise."></i>
+              </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
                 </div>
+                <input type="number" min="0" step="0.01" class="form-control" id="isoGains" value="0" style="letter-spacing:0.1em">
+              </div>
             </div>
             <div class="mb-3">
-              <label for="pensionContributions">Personal Pension Contributions (<span style="font-weight:500">401k</span>)</label>
+              <label for="pensionContributions" style="width:100%">Personal Pension Contributions (<span style="font-weight:500">401k</span>)
+                <i class="fas fa-info-circle" style="float:right" data-toggle="tooltip" data-html="true" data-placement="top" title="Total value of personal contributions to a 401K account.<br/><br/>Do not include Roth IRA or employer contributions to your 401K in your calculation.<br/><br/>Note that 401K contributions are one of the only deductible items from your adjusted income for AMT."></i>
+              </label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input type="number" min="0" max="28000" step="0.01" class="form-control" id="pensionContributions" value=0 style="letter-spacing:0.1em">
+                  <input type="number" min="0" max="48000" step="0.01" class="form-control" id="pensionContributions" value=0 style="letter-spacing:0.1em">
                 </div>
             </div>
 

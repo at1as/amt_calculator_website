@@ -8,20 +8,15 @@ Issues, PRs, and feedback are welcome (and encouraged 😅)
 
 ### Website
 
-Hosted site snapshot from 2 August 2018 available here [https://www.jasonwillems.com](https://www.jasonwillems.com/sites/amtcalculator/index.html).
+Hosted site snapshot from 9 August 2018 available here [https://www.jasonwillems.com](https://www.jasonwillems.com/sites/amtcalculator/index.html).
 
-Note that it's a static HTML page. Information entered does not leave that page.
+Note that this is a static HTML page (for which the source code is available in this repo). Information entered remains entirely in your browser.
 
 ### Screenshot
 
 #### Taken on 2 August 2018:
 
 ![screenshot](https://github.com/at1as/at1as.github.io/raw/master/github_repo_assets/amt_calculator_1.png)
-
-### TODO
-
-* add support for other filing types
-* add explanations for each field
 
 ### Legal
 

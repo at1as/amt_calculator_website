@@ -186,3 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('page_title').innerHTML = `AMT Tax Calculator – ${taxYear()}`;
 });
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
